@@ -1,12 +1,14 @@
 package br.univali.whorshopmongo.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.univali.whorshopmongo.domain.User;
 import br.univali.whorshopmongo.repository.UserRepository;
+import br.univali.whorshopmongo.service.exe.ObjectNotFoundException;
 
 @Service
 public class UserService {
@@ -16,5 +18,13 @@ public class UserService {
 
 	public List<User> findALL(){
 		return userRepository.findAll();
+	}
+	
+	public User findById(String id) {
+		User user =  userRepository.findOne(id);
+		if(user == null) {
+			throw new ObjectNotFoundException("Objeto nao encontrado");
+		}
+		return user;
 	}
 }
