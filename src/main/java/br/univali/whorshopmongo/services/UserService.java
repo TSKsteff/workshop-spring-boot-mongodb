@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.univali.whorshopmongo.domain.User;
+import br.univali.whorshopmongo.dto.UserDTO;
 import br.univali.whorshopmongo.repository.UserRepository;
 import br.univali.whorshopmongo.service.exe.ObjectNotFoundException;
 
@@ -26,5 +27,13 @@ public class UserService {
 			throw new ObjectNotFoundException("Objeto nao encontrado");
 		}
 		return user;
+	}
+	
+	public User insert(User user) {
+		return userRepository.insert(user);
+	}
+	
+	public User fromDTO(UserDTO userDTO) {
+		return new User(userDTO.getId(), userDTO.getName(), userDTO.getEmail());
 	}
 }
