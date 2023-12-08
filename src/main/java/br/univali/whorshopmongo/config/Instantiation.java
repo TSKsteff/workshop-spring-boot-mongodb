@@ -42,7 +42,12 @@ public class Instantiation implements CommandLineRunner {
 		Post post2 = new Post(null, sdf.parse("07/12/2023"), "Partiu ferias", "vou para tirolesa", new AuthorDTO(ted)); 
 		
 		postRepository.saveAll(Arrays.asList(post1,post2));
-		userRepository.saveAll(Arrays.asList(steff,piard,ted));
+		
+		
+		steff.getPosts().add(post1);
+		ted.getPosts().add(post2);
+		userRepository.saveAll(Arrays.asList(steff,ted));
+		
 	}
 
 }
