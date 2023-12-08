@@ -7,6 +7,8 @@ import java.util.Objects;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import br.univali.whorshopmongo.dto.AuthorDTO;
+
 @Document
 public class Post implements Serializable{
 
@@ -16,19 +18,19 @@ public class Post implements Serializable{
 	private Date date;
 	private String title;
 	private String body;
-	private User user;
+	private AuthorDTO authorDTO;
 	
 	public Post() {
 		
 	}
 	
-	public Post(String id, Date date, String title, String body, User user) {
+	public Post(String id, Date date, String title, String body, AuthorDTO authorDTO) {
 		super();
 		this.id = id;
 		this.date = date;
 		this.title = title;
 		this.body = body;
-		this.user = user;
+		this.authorDTO = authorDTO;
 	}
 
 	public String getId() {
@@ -63,17 +65,17 @@ public class Post implements Serializable{
 		this.body = body;
 	}
 
-	public User getUser() {
-		return user;
+	public AuthorDTO getAuthorDTO() {
+		return authorDTO;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setAuthorDTO(AuthorDTO AuthorDTO) {
+		this.authorDTO = AuthorDTO;
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(body, date, id, title, user);
+		return Objects.hash(body, date, id, title, authorDTO);
 	}
 
 	@Override
@@ -86,7 +88,7 @@ public class Post implements Serializable{
 			return false;
 		Post other = (Post) obj;
 		return Objects.equals(body, other.body) && Objects.equals(date, other.date) && Objects.equals(id, other.id)
-				&& Objects.equals(title, other.title) && Objects.equals(user, other.user);
+				&& Objects.equals(title, other.title) && Objects.equals(authorDTO, other.authorDTO);
 	}
 	
 }
