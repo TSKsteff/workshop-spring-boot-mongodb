@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Configuration;
 import br.univali.whorshopmongo.domain.Post;
 import br.univali.whorshopmongo.domain.User;
 import br.univali.whorshopmongo.dto.AuthorDTO;
+import br.univali.whorshopmongo.dto.CommentDTO;
 import br.univali.whorshopmongo.repository.PostRepository;
 import br.univali.whorshopmongo.repository.UserRepository;
 
@@ -41,8 +42,13 @@ public class Instantiation implements CommandLineRunner {
 		Post post1 = new Post(null, sdf.parse("31/10/2023"), "Partiu vuagem", "vou para são paulo", new AuthorDTO(steff)); 
 		Post post2 = new Post(null, sdf.parse("07/12/2023"), "Partiu ferias", "vou para tirolesa", new AuthorDTO(ted)); 
 		
-		postRepository.saveAll(Arrays.asList(post1,post2));
+		CommentDTO c1 = new CommentDTO("Boa viagem mano", sdf.parse("21/03/2018"), new AuthorDTO(ted));
+		CommentDTO c2 = new CommentDTO("Boa viagem mano", sdf.parse("21/03/2018"), new AuthorDTO(steff));
+		CommentDTO c3 = new CommentDTO("Tenha um otimo dia", sdf.parse("24/03/2018"), new AuthorDTO(steff));
 		
+		post1.getComments().addAll(Arrays.asList(c2,c3));
+		post2.getComments().addAll(Arrays.asList(c1));
+		postRepository.saveAll(Arrays.asList(post1,post2));
 		
 		steff.getPosts().add(post1);
 		ted.getPosts().add(post2);
