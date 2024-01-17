@@ -1,5 +1,6 @@
 package br.univali.whorshopmongo.services;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,8 +24,17 @@ public class PostService {
 		}
 		return post;
 	}
-	
+	 
 	public List<Post> findByTitle(String text){
+		return postRepository.searchByTitle(text);
+	}
+	
+	public List<Post> fulSearch(String text, Date minDate, Date maxDate){
+		maxDate = new Date(maxDate.getTime() + 24 * 60 * 60 * 1000);
+		return postRepository.fullSearch(text, minDate, maxDate);
+	}
+	
+	public List<Post> searchByTitle(String text){
 		return postRepository.searchByTitle(text);
 	}
 }
